@@ -46,21 +46,26 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2') {
-            steps {
-                sh """
-                ssh -i $KEY -o StrictHostKeyChecking=no $EC2_HOST '
-                    aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ECR_REPO
+     stage('Deploy to EC2') {
+         steps {
+             sh """
+             ssh -i $KEY -o StrictHostKeyChecking=no $EC2_HOST '
+                 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ECR_REPO
 
-                    docker pull $ECR_REPO:latest
+                 docker pull $ECR_REPO:latest
 
-                    docker stop product-service || true
-                    docker rm product-service || true
+                 docker stop product-service || true
+                 docker rm product-service || true
 
-                    docker run -d -p 8080:8080 --name product-service $ECR_REPO:latest
-                '
-                """
-            }
-        }
+                 docker run -d \
+                   --name product-service \
+                   -p 8080:8080 \
+                   -e SPRING_PROFILES_ACTIVE=prod \
+                   --network product-service_crud-network \
+                   $ECR_REPO:latest
+             '
+             """
+         }
+     }
     }
 }
