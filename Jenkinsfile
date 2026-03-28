@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_HOST = "ec2-user@<EC2-IP>"
+        EC2_HOST = "ec2-user@3.108.60.38"
         APP_NAME = "product-service"
     }
 
@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-repo.git'
+                git 'https://github.com/amitamitmm/product-service.git'
             }
         }
 
