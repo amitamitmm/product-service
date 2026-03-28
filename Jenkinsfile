@@ -47,20 +47,22 @@ pipeline {
         }
 
         stage('Deploy to EC2') {
-            steps {
-                sh """
-                ssh -i $KEY -o StrictHostKeyChecking=no $EC2_HOST '
-                    aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ECR_REPO
+             steps {
+                    sh """
+                    ssh -i /var/lib/jenkins/.ssh/first-key-pair.pem ec2-user@43.205.236.125 '
 
-                    docker pull $ECR_REPO:latest
+                        aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 237586137911.dkr.ecr.ap-south-1.amazonaws.com
 
-                    docker stop product-service || true
-                    docker rm product-service || true
+                        cd /home/ec2-user/app
 
-                    docker run -d -p 8080:8080 --name product-service $ECR_REPO:latest
-                '
-                """
-            }
+                        docker-compose down
+
+                        docker-compose pull
+
+                        docker-compose up -d
+                    '
+                    """
+                }
         }
     }
 }

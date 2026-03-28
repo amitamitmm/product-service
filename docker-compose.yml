@@ -1,4 +1,5 @@
 services:
+
   postgresql:
     image: postgres:16-alpine
     container_name: crud-postgres
@@ -10,22 +11,16 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - crud-network
 
-  crud-app:
-    build: .   # 👈 IMPORTANT (uses your Dockerfile)
-    container_name: crud-app
+  product-service:
+    image: 237586137911.dkr.ecr.ap-south-1.amazonaws.com/product-service:latest
+    container_name: product-service
     ports:
       - "8080:8080"
     depends_on:
-      postgresql:
-        condition: service_healthy
+      - postgresql
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/cruddb
       SPRING_DATASOURCE_USERNAME: postgres
