@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_HOST = "ec2-user@3.108.60.38"
+        EC2_HOST = "ec2-user@65.0.95.102"
         APP_NAME = "product-service"
     }
 
