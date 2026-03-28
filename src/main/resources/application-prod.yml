@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://43.205.236.125:5432/cruddb}
+    url: ${DATASOURCE_URL:jdbc:postgresql://host.docker.internal:5432/cruddb}
     driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:Postgres@123}
