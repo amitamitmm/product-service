@@ -27,15 +27,15 @@ pipeline {
         }
 
         stage('Deploy to EC2') {
-            steps {
-                sh """
-                ssh -o StrictHostKeyChecking=no $EC2_HOST '
-                docker stop product-service || true
-                docker rm product-service || true
-                docker run -d -p 8080:8080 --name product-service product-service
-                '
-                """
-            }
+             steps {
+                         sh """
+                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $EC2_HOST '
+                             docker stop product-service || true
+                             docker rm product-service || true
+                             docker run -d -p 8080:8080 --name product-service product-service
+                         '
+                         """
+                     }
         }
     }
 }
