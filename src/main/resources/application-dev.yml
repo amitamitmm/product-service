@@ -1,9 +1,4 @@
 spring:
-  application:
-    name: product-service
-  profiles:
-    active: prod
-
   datasource:
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/cruddb}
     driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
@@ -22,9 +17,3 @@ spring:
   sql:
     init:
       mode: always
-
-
-server:
-  port: 8080
-  servlet:
-    context-path: /product-service
