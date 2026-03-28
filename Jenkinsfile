@@ -28,14 +28,14 @@ pipeline {
 
         stage('Deploy to EC2') {
              steps {
-                         sh """
-                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $EC2_HOST '
-                             docker stop product-service || true
-                             docker rm product-service || true
-                             docker run -d -p 8080:8080 --name product-service product-service
-                         '
-                         """
-                     }
+                   sh """
+                   ssh -i /var/lib/jenkins/.ssh/first-key-pair.pem -o StrictHostKeyChecking=no ec2-user@43.205.236.125 '
+                       docker stop product-service || true
+                       docker rm product-service || true
+                       docker run -d -p 8080:8080 --name product-service product-service
+                   '
+                   """
+               }
         }
     }
 }
