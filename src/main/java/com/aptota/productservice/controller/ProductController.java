@@ -27,7 +27,7 @@ public class ProductController {
      */
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        log.info("Request received: GET /api/products");
+        log.info("Request Neeraj ***** received: GET /api/products");
         List<ProductDTO> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
