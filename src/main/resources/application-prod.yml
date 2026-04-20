@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://crud-postgres:5432/cruddb}
+    url: ${DATASOURCE_URL:jdbc:postgresql://database-1.co9ekoe6itde.us-east-1.rds.amazonaws.com:5432/postgres}
     driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
     username: ${DATASOURCE_USERNAME:postgres}
-    password: ${DATASOURCE_PASSWORD:password}
+    password: ${DATASOURCE_PASSWORD:Postgres123}
 
   jpa:
     hibernate:

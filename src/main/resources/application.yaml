@@ -2,7 +2,7 @@ spring:
   application:
     name: product-service
   profiles:
-    active: prod
+    active: dev
 
   datasource:
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/cruddb}
